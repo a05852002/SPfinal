@@ -15,6 +15,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -96,8 +97,23 @@ public class _01_membercontroll {
 		return user;
 	}
 	
+//	權限動態控制
+	@ResponseBody
+	@PostMapping("/_01_member.rolecheck.controller")
+	public String roleRWD() {
+		String user = "";
+		user = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<MemberBean> list = ms.searchMemByAccount(user);
+		String role = "";
+		for (MemberBean member : list) {
+			role = member.getRole();
+		}
+		return role;
+	}
+	
 	
 //	查詢類controll
+	@PreAuthorize("hasRole('admin')")
 	@GetMapping("/_01_member.admin.controller")
 	public String admin(Model m) {
 		List<MemberBean> all = ms.searchAllMember();

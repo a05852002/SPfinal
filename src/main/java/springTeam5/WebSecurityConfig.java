@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .and()
          .csrf().disable()
          .formLogin().loginPage("/login/page")
-         .defaultSuccessUrl("/backIndex")
+         .defaultSuccessUrl("/index.controller")
          .and()
          .logout()
          .logoutUrl("/logout") //自定義登出URL
