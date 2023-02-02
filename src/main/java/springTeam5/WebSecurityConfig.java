@@ -2,6 +2,8 @@ package springTeam5;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,13 +12,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import springTeam5._01_member.model.AuthUserDetialService;
 
-
+@Configuration
 @EnableWebSecurity
+@PropertySource("classpath:application.properties")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -43,19 +44,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	public void configure(HttpSecurity http) throws Exception {
        http
          .authorizeRequests()
-         .antMatchers("/index.controller").permitAll()
+         .antMatchers("/index").permitAll()
          .antMatchers("/login/page").permitAll()
          .antMatchers(HttpMethod.GET,"/backIndex.controller").hasRole("admin")
          .antMatchers(HttpMethod.POST,"/backIndex.controller").hasRole("admin")
          .antMatchers("/backIndex").hasRole("admin")
-//         .anyRequest().authenticated()
+         .anyRequest().permitAll()	
+         .and()  //Google第三方驗證
+         .oauth2Client()
          .and()
-//         .exceptionHandling()
-//         .accessDeniedPage("/errorpages/AccessDenied")
-//         .and()
+         .exceptionHandling()
+         .accessDeniedPage("/error403") //攔截403並轉向客製化403
+         .and()
          .rememberMe().tokenValiditySeconds(86400).key("rememberMe-key")
          .and()
          .csrf().disable()

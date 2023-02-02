@@ -35,7 +35,7 @@
 								<link rel="stylesheet" href="<%=basePath%>" />
 								<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 								<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-								<script>
+								<script type="text/javascript">
 									$(function () {
 
 										$.ajax({
@@ -61,32 +61,7 @@
 
 									});
 								</script>
-								<script>
-									$(function () {
-
-										$.ajax({
-											type: 'POST',
-											url: '_01_member.rolecheck.controller',
-											contentType: 'application/json',
-
-											success: function (role) {
-
-												if (role == "admin" ) {
-													console.log(role + "管理員");
-													
-													//管理員要執行的動作
-													$("#animation").show();//比方說show動畫
-													   //這裡是ID標籤
-													
-												} else {
-													console.log(role + "用戶");
-													//使用者要執行的動作
-												}
-											}
-										});
-
-									});
-								</script>
+								
 							</head>
 
 							<body class="is-preload">

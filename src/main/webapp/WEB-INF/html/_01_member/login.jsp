@@ -84,6 +84,7 @@
 															<input type="reset" name="cancel" id="cancel"
 																value="重填"></span>
 													</form>
+													<a href="<%=request.getContextPath()%>/login/oauth2/code/google">Google</a>
 												</div>
 												<br>
 												<br>
