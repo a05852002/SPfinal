@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .antMatchers("/index").permitAll()
          .antMatchers("/login/page").permitAll()
          .antMatchers(HttpMethod.GET,"/backIndex.controller").hasAnyAuthority("admin")
-//         .antMatchers(HttpMethod.POST,"/backIndex.controller").hasRole("admin")
+         .antMatchers(HttpMethod.POST,"/backIndex.controller").hasRole("admin")
 //         .anyRequest().authenticated()
          
          .and()  //Google第三方驗證

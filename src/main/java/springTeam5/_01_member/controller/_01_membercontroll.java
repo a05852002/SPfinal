@@ -99,7 +99,7 @@ public class _01_membercontroll {
 	
 //	權限動態控制
 	@ResponseBody
-	@PostMapping("/_01_member.rolecheck.controller")
+	@PostMapping("/admin/_01_member.rolecheck.controller")
 	public String roleRWD() {
 //		String user = "";
 //		user = SecurityContextHolder.getContext().getAuthentication().getName();
