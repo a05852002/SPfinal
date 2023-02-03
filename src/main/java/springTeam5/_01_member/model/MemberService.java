@@ -29,8 +29,9 @@ public class MemberService {
 	}
 	
 //	刪除
-	public void delete(Integer memberID) {
-		memberRepository.deleteById(memberID);
+	public void delete(String account) {
+		List<MemberBean> list = searchMemByAccount(account);
+		memberRepository.delete(list.get(0));;
 	}
 	
 //	修改

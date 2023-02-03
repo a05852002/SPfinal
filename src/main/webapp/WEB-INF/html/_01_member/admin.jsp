@@ -163,7 +163,7 @@
 																			<form method="post"
 																				action="_01_member.delete.controller">
 																				<button name="delete"
-																					value="${Member.memberID}">
+																					value="${Member.account}">
 																					<i class="fa-solid fa-xmark"></i>
 																				</button>
 																			</form>

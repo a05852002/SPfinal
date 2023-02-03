@@ -64,22 +64,23 @@
 											contentType: 'application/json',
 
 											success: function (role) {
-												 if (role == "admin" ) {
-												 console.log(role + "管理員");
-												     
-												//管理員要執行的動作
-												 //這裡是ID標籤
-												             
+												if (role == "admin") {
+													console.log(role + "管理員");
+													$("#backend").show();
+													//管理員要執行的動作
+													//這裡是ID標籤
+
 												} else {
-												 console.log(role + "用戶");
-												//使用者要執行的動作
+													console.log(role + "用戶");
+													//使用者要執行的動作
+													$("#backend").hide();
 												}
-												}
+											}
 										});
 
 									});
 								</script>
-								
+
 							</head>
 
 							<body class="is-preload">
@@ -360,7 +361,8 @@
 												<ul>
 													<li><a href="<c:url value='/index.controller' />">首頁 <i
 																class="fa-solid fa-house"></i></a></li>
-													<li><a href="<c:url value='/backIndex.controller' />">後台管理 <i
+													<li id="backend"><a
+															href="<c:url value='/backIndex.controller' />">後台管理 <i
 																class="fa-solid fa-gears"></i></a></li>
 													<!-- 		<li><a href="../MeetBothMember/admin.jsp">會員資料 <i class="fa-solid fa-users"></i></a></li>
 						<li><a href="elements.html">找老師 <i

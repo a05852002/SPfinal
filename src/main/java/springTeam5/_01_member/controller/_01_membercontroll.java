@@ -101,13 +101,14 @@ public class _01_membercontroll {
 	@ResponseBody
 	@PostMapping("/_01_member.rolecheck.controller")
 	public String roleRWD() {
-		String user = "";
-		user = SecurityContextHolder.getContext().getAuthentication().getName();
-		List<MemberBean> list = ms.searchMemByAccount(user);
-		String role = "";
-		for (MemberBean member : list) {
-			role = member.getRole();
-		}
+//		String user = "";
+//		user = SecurityContextHolder.getContext().getAuthentication().getName();
+//		List<MemberBean> list = ms.searchMemByAccount(user);
+		String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray()[0].toString();
+//		String role = "";
+//		for (MemberBean member : list) {
+//			role = member.getRole();
+//		}
 		return role;
 	}
 	
@@ -194,6 +195,7 @@ public class _01_membercontroll {
 		InputStream is = null;
 		String encodePwd = new BCryptPasswordEncoder().encode(member.getPassword());
 		newMember.setPassword(encodePwd);
+		newMember.setMemberID(0);
 		if (ms.searchMemByAccount(member.getAccount()).size() == 0) {
 			fileName = mf.getOriginalFilename();
 			if (fileName != null && fileName.trim().length() > 0) {
@@ -264,8 +266,8 @@ public class _01_membercontroll {
 	
 //	刪除
 	@PostMapping(path = "/_01_member.delete.controller")
-	public String delete(@RequestParam("delete") int memberID) {
-		ms.delete(memberID);
+	public String delete(@RequestParam("delete") String account) {
+		ms.delete(account);
 		return "redirect:/_01_member.admin.controller";
 	}
 	

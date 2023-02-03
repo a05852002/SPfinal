@@ -35,11 +35,10 @@ public class MemberBean implements Serializable {
 //	@OneToMany(mappedBy = "MemberBean")
 //	private List<TeacBean> teac;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "memberID", updatable = false)
 	private int memberID;
 	
+	@Id
 	@Column(name = "account")
 	private String account = "";
 		

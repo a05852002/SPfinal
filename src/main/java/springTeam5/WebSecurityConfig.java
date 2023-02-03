@@ -27,13 +27,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AuthUserDetialService authService;
 	
-	@Bean
-	public AuthorizationRequestRepository<OAuth2AuthorizationRequest> 
-	  authorizationRequestRepository() {
-	 
-	    return new HttpSessionOAuth2AuthorizationRequestRepository();
-	}
-	
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -53,11 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .authorizeRequests()
          .antMatchers("/index").permitAll()
          .antMatchers("/login/page").permitAll()
-         .antMatchers(HttpMethod.GET,"/backIndex.controller").hasRole("admin")
-         .antMatchers(HttpMethod.POST,"/backIndex.controller").hasRole("admin")
-         .antMatchers(HttpMethod.PUT,"/backIndex.controller").hasRole("admin")
-         .antMatchers("/backIndex").hasRole("admin")
+         .antMatchers(HttpMethod.GET,"/backIndex.controller").hasAnyAuthority("admin")
+//         .antMatchers(HttpMethod.POST,"/backIndex.controller").hasRole("admin")
 //         .anyRequest().authenticated()
+         
          .and()  //Google第三方驗證
          
          .oauth2Login()
@@ -83,7 +75,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .logoutUrl("/logout") //自定義登出URL
          .logoutSuccessUrl("/") //登出成功後導向首頁
          .deleteCookies("JSESSIONID") //刪除指定的Cookie
-         .clearAuthentication(true)
          .invalidateHttpSession(true) //使HttpSession失效
          .and()
          
