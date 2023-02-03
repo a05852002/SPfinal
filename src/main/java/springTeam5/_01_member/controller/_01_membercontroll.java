@@ -215,9 +215,9 @@ public class _01_membercontroll {
 //	修改
 	@PostMapping(path = "/_01_member.preupdate.controller")
 	public String preupdate(@RequestParam("preupdate") int memberID, Model m) {
-		Optional<MemberBean> data = ms.searchMemByID(memberID);
-		List<MemberBean> list = data.stream().collect(Collectors.toList());
-		m.addAttribute("Member", list);
+		List<MemberBean> data = ms.searchMemByID(memberID);
+//		List<MemberBean> list = data.stream().collect(Collectors.toList());
+		m.addAttribute("Member", data);
 		return "_01_member/memberupdate";
 	}
 	
@@ -231,7 +231,7 @@ public class _01_membercontroll {
 		if (list.size() != 0) {
 			MemberBean check = list.get(0);
 			newMem.setMemberID(check.getMemberID());
-			newMem.setAccount(member.getAccount());
+			newMem.setAccount(check.getAccount());
 			newMem.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
 			newMem.setIdNumber(member.getIdNumber());
 			newMem.setMemName(member.getMemName());
@@ -243,6 +243,8 @@ public class _01_membercontroll {
 			newMem.setPhone(member.getPhone());
 			newMem.setPhoto(check.getPhoto());
 			newMem.setAddress(member.getAddress());
+			newMem.setRole(check.getRole());
+			System.out.println(newMem.toString());
 			fileName = mf.getOriginalFilename();
 			if (fileName != null && fileName != "" && fileName.trim().length() > 0) {
 				long size = mf.getSize();

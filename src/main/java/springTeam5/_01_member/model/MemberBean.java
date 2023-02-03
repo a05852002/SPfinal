@@ -37,9 +37,8 @@ public class MemberBean implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "memberID")
+	@Column(name = "memberID", updatable = false)
 	private int memberID;
-	
 	
 	@Column(name = "account")
 	private String account = "";

@@ -58,6 +58,24 @@
 												}
 											}
 										});
+										$.ajax({
+											type: 'POST',
+											url: '_01_member.rolecheck.controller',
+											contentType: 'application/json',
+
+											success: function (role) {
+												 if (role == "admin" ) {
+												 console.log(role + "管理員");
+												     
+												//管理員要執行的動作
+												 //這裡是ID標籤
+												             
+												} else {
+												 console.log(role + "用戶");
+												//使用者要執行的動作
+												}
+												}
+										});
 
 									});
 								</script>

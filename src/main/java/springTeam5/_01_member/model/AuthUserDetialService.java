@@ -1,6 +1,5 @@
 package springTeam5._01_member.model;
 
-import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
